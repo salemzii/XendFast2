@@ -140,13 +140,17 @@ def successmsg(request, args):
     return render(request, 'segun_app/success.html')
 
 def check_verified(request):
-    k_check = kycinfo.objects.get(id=request.user.id)
-    context={
-        'kc': k_check,
-    }
-    if k_check.is_verified:
-        return render(request, 'segun_app/checkVerified.html', context)
-    else:
+    try:
+
+        k_check = kycinfo.objects.get(id=request.user.id)
+        context={
+            'kc': k_check,
+        }
+        if k_check.is_verified:
+            return render(request, 'segun_app/checkVerified.html', context)
+        else:
+            return redirect(reverse('uploadKyc', args=[request.user.id]))
+    except Exception as e:
         return redirect(reverse('uploadKyc', args=[request.user.id]))
 
 
@@ -161,11 +165,14 @@ class createKycinfo(CreateView):
     fields = ['name', 'dob', 'phone_number', 'home_address', 'personal_ids',]
     pk_url_kwarg = 'user_id'
     context_object_name = 'user'
+    success_url = 'kyc-success'
 
     def form_valid(self, form):
         form.instance.Link = self.request.user
         return super().form_valid(form)
 
+def kyc_succ(request):
+    return render(request, 'segun_app/kycsuccess.html')
 
 def kyc_msg(request, user_id):
     user = User.objects.get(id=user_id)

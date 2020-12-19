@@ -1,13 +1,20 @@
 {% extends 'segun_app/base.html' %}
+
 {% load static %}
 {% block content %}
 
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}">
-                {{ message }}
+    <style>
+        .contain {
+                width: 40%;
+                align:center;
+                margin: 100 auto;
+                }
+    </style>
+
+        <div class="alert alert-info">
+            <div class="contain">
+                <h3>You've Successfully Uploaded your KYC data, kindly hold on while we verify your account <a href="{% url 'home'%}">Click here to go back home</a></h3>
             </div>
-        {% endfor %}
-    {% endif %}
-    <img src="{% static 'img/bootstrap.png' %}" width="100" height="100">
+        </div>
+
 {% endblock content %}
