@@ -53,6 +53,10 @@ def verify_mail(request):
     return render(request, 'segun_app/verify_mail.html')
 
 
+def landing_page(request):
+    return render(request,'segun_app/landing.html')
+
+
 def check_user(request):
     try:
         kyc = kycinfo.objects.get(id=request.user.id)
@@ -135,6 +139,16 @@ def successmsg(request, args):
     }
     return render(request, 'segun_app/success.html')
 
+def check_verified(request):
+    k_check = kycinfo.objects.get(id=request.user.id)
+    context={
+        'kc': k_check,
+    }
+    if k_check.is_verified:
+        return render(request, 'segun_app/checkVerified.html', context)
+    else:
+        return redirect(reverse('uploadKyc', args=[request.user.id]))
+
 
 def email_success(request):
     messages.success(request, 'Mail Verification Successful...')
@@ -146,6 +160,7 @@ class createKycinfo(CreateView):
     template_name = 'segun_app/upkyc.html'
     fields = ['name', 'dob', 'phone_number', 'home_address', 'personal_ids',]
     pk_url_kwarg = 'user_id'
+    context_object_name = 'user'
 
     def form_valid(self, form):
         form.instance.Link = self.request.user

@@ -1,8 +1,6 @@
 {% extends 'segun_app/base.html' %}
-
 {% load static %}
 {% block content %}
-
     <style>
         .contain {
                 width: 40%;
@@ -11,10 +9,8 @@
                 }
     </style>
 
-        <div class="alert alert-info">
-            <div class="contain">
-                <h3>Logged Out Successfully, <a href="{% url 'login'%}">Click here to LOGIN again</a></h3>
-            </div>
-        </div>
+    <div class="alert alert-info">
+        <h3>Hi {{ kc.name }} you are a verified user, <a href="{% url 'send-money'%}">click here to send money</a></h3>
+    </div>
 
 {% endblock content %}

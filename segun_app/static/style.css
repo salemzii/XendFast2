@@ -27,6 +27,16 @@ html, body {
     width: 100%;
     background-size: cover;
 }
+
+#kyc {
+    background: url(segun_app/kyc.jpg) no-repeat center center fixed;
+    display: table;
+    height: 100%;
+    position: relative;
+    width: 100%;
+    background-size: cover;
+}
+
 .landing-text {
     display: table-cell;
     text-align: center;
@@ -90,8 +100,7 @@ form {
     margin: 100 auto;
     align: center;
 }
-.container {
-    width: 40%;
-    align:center;
-    margin: 100 auto;
+.a:hover {
+  color: pink;
 }
+

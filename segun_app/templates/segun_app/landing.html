@@ -2,52 +2,75 @@
 
 
 {% load static %}
-
-<div id="home">
-    <div class="landind-text">
-        <h1>BOOTSTRAP</h1>
-        <h3>Learn the basic building blocks.</h3>
-        <a href="#" class="btn btn-default btn-lg">Get Started</a>
-    </div>
-</div>
-
-<div class="padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6">
-                <img src="{% static 'segun_app/bootstrap.png' %}">
+{% block content %}
+        <section>
+            <div id="home">
+                <div class="landing-text">
+                    <h1>We XendFast</h1>
+                    <h3>Begin to Send money to friends and family as soon as possible</h3>
+                    <a href="{% url 'sign-up' %}" class="btn btn-default btn-lg">Sign Up</a>
+                </div>
             </div>
-            <div class="col-sm-6 text-center">
-                <h2>All about Using Bootstrap.</h2>
-                <p class="lead"></p>
-                <p class="lead"></p>
+        </section>
+
+
+
+        <section>
+            <div id="kyc">
+                <div class="landing-text">
+                    <h1>Upload Your KYC</h1>
+                    <h3>Let get to know more about you...</h3>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'check' %}" class="btn btn-default btn-lg">Upload KYC</a>
+                        <a href="{% url 'check' %}" class="mk-hover"><small>We promise to keep what ever you share with us private</small></a>
+                    {% else  %}
+                        <a href="{% url 'login' %}" class="btn btn-default btn-lg">Login</a>
+                        <a href="{% url 'sign-up' %}" class="mk-hover"><small>Or Sign Up first</small></a>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+
+
+
+        <div class="padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <img src="{% static 'segun_app/bootstrap.png' %}">
+                    </div>
+                    <div class="col-sm-6 text-center">
+                        <h2>All about Using Bootstrap.</h2>
+                        <p class="lead"></p>
+                        <p class="lead"></p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
 
-<div class="paddding">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <h4>Built with Sass</h4>
-                <p></p>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <img src="{% static 'segun_app/sass.png' %}" class="img-responsive">
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <h4>Built with Sass</h4>
-                <p></p>
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                <img src="{% static 'segun_app/less.png' %}" class="img-responsive">
+        <div class="paddding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <h4>Built with Sass</h4>
+                        <p></p>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <img src="{% static 'segun_app/sass.png' %}" class="img-responsive">
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <h4>Built with Sass</h4>
+                        <p></p>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <img src="{% static 'segun_app/less.png' %}" class="img-responsive">
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
-<div id="fixed">
+        <div id="fixed">
 
-</div>
+        </div>
+{% endblock content %}
