@@ -53,10 +53,9 @@ def verify_mail(request):
     return render(request, 'segun_app/verify_mail.html')
 
 
-def home(request):
+def check_user(request):
     try:
         kyc = kycinfo.objects.get(id=request.user.id)
-        print(kyc)
     except Exception as e:
         return redirect(reverse('uploadKyc', args=[request.user.id]))
 
@@ -69,6 +68,14 @@ def home(request):
 
 @login_required
 def transaction(request):
+    try:
+        kyc = kycinfo.objects.get(name=request.user.username)
+        if not kyc.is_verified:
+            return redirect(reverse('uploadKyc', args=[request.user.id]))
+        else:
+            return render(request, 'segun_app/transaction.html')
+    except Exception as e:
+        return redirect(reverse('uploadKyc', args=[request.user.id]))
     return render(request, 'segun_app/transaction.html')
 
 
@@ -87,7 +94,7 @@ class verification(View):
             user.is_active = True
             user.save()
 
-            messages.success(request, 'Account actvated successfully')
+            messages.success(request, 'Account activated successfully')
             return redirect('login')
         except Exception as e:
             pass
@@ -99,6 +106,7 @@ def charge(request):
     query = rate.objects.get(id=1)
     val = query.exchange_rate
     total = 100 * val
+    recipient = request.POST['to']
     amount = int(request.POST['amount'])
     if request.method == 'POST':
         print('Date:', request.POST)
@@ -115,15 +123,17 @@ def charge(request):
             description='Exchanges'
         )
 
-    return redirect(reverse('success', args=[amount]))
+    return redirect(reverse('success', args=[amount, recipient]))
 
 
 def successmsg(request, args):
-    amount = args
+    amount = args[0]
+    recp= args[1]
     context = {
-        'amount': amount
+       'amount': amount,
+        'r': recp
     }
-    return render(request, 'segun_app/success.html', context)
+    return render(request, 'segun_app/success.html')
 
 
 def email_success(request):
@@ -134,7 +144,7 @@ def email_success(request):
 class createKycinfo(CreateView):
     model = kycinfo
     template_name = 'segun_app/upkyc.html'
-    fields = ['name', 'home_address', 'personal_ids', 'dob']
+    fields = ['name', 'dob', 'phone_number', 'home_address', 'personal_ids',]
     pk_url_kwarg = 'user_id'
 
     def form_valid(self, form):
@@ -145,7 +155,7 @@ class createKycinfo(CreateView):
 def kyc_msg(request, user_id):
     user = User.objects.get(id=user_id)
     messages.error(request,
-                   f'KYC data has not been provides for {user.username},  an email would be sent to them to do so immediately...')
+                   f'KYC data has not been provides for {user.username}, an email would be sent to them to do so immediately...')
     return render(request, 'segun_app/kycmessge.html')
 
 

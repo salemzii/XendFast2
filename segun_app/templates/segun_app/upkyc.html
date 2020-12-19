@@ -1,13 +1,14 @@
 {% extends 'segun_app/base.html' %}
-
+{% load crispy_forms_tags %}
+{% load static %}
 
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    <fieldset>
-        <legend>Let's know more about you</legend>
-        {{ form }}
-    </fieldset>
-    <button type="submit">upload data</button>
-</form>
+    <form method="post" class="container">
+        {% csrf_token %}
+        <fieldset>
+            <legend class="border-bottom mb-4">Let's know more about you</legend>
+            {{ form|crispy }}
+        </fieldset>
+        <button type="submit">upload data</button>
+    </form>
 {% endblock content %}

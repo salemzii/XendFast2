@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os, smtplib
-import django_heroku
+#import django_heroku
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -124,7 +124,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -136,6 +136,7 @@ LOGIN_URL = 'login'
 
 
 #mailing
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = os.environ.get('mail_name')
 EMAIL_USE_TLS = True
@@ -143,4 +144,4 @@ DEFAULT_FROM_EMAIL = os.environ.get('mail_name')
 EMAIL_PORT = 587
 EMAIL_HOST_PASSWORD = os.environ.get('mail_pswd')
 
-django_heroku.settings(locals())
+#django_heroku.settings(locals())

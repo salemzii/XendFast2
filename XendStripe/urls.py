@@ -23,5 +23,11 @@ urlpatterns = [
     path('', include('segun_app.urls')),
     path('login/', authviews.LoginView.as_view(template_name='segun_app/login.html'), name='login'),
     path('logout/', authviews.LogoutView.as_view(template_name='segun_app/logout.html'), name='logout'),
+    path('password-reset/', authviews.PasswordResetView.as_view(template_name='segun_app/password_reset.html'),
+    name='password_reset'),
+    path('password-reset/done/', authviews.PasswordResetDoneView.as_view(template_name='segun_app/password_reset_done.html'),
+    name='password_reset_done'),
+    path('password-reset-confirm/<uidb64>/<token>/',authviews.PasswordResetConfirmView.as_view(template_name='segun_app/password_reset_confirm.html'),
+    name='password_reset_confirm')
 
 ]

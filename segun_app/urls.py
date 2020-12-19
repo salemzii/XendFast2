@@ -6,10 +6,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
 
-    path('', views.home, name='home'),
+    path('', views.check_user, name='check'),
     path('send_money/', views.transaction, name='send-money'),
     path('charge/', views.charge, name='charge'),
-    path('success/<str:args>', views.successmsg, name='success'),
+    path('success/<str:args>', views.successmsg, name='success'), #<str:args>
     path('register/', views.register, name='sign-up'),
     path('email_verify/', views.email_success, name='e-success'),
     path('verify_mail/', views.verify_mail, name='verify'),

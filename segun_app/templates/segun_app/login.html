@@ -1,11 +1,9 @@
 {% extends 'segun_app/base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <div class="content-section">
-        <form method="POST">
+        <form method="POST" class="container">
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Log In</legend>
