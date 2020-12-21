@@ -40,7 +40,7 @@ def register(request):
             email_body = 'Hello {0} thanks for signing up with us, please use this link to verify your account \n {1}'.format(
                 username, activate_url)
 
-            email = send_mail(email_subject, email_body, 'Noreply@FX.com', [mail])
+            email = send_mail(email_subject, email_body, 'Noreply@FX.com', [mail], fail_silently= True)
             messages.success(request, f'Congrats {username}, Your account was created successfully')
 
             return redirect('verify')
@@ -127,17 +127,16 @@ def charge(request):
             description='Exchanges'
         )
 
-    return redirect(reverse('success', args=[amount, recipient]))
+    return redirect(reverse('success', args=[amount]))  #kwargs={'sid':int(ph), 'company':company}
 
 
 def successmsg(request, args):
-    amount = args[0]
-    recp= args[1]
+    amount = args
     context = {
        'amount': amount,
-        'r': recp
     }
-    return render(request, 'segun_app/success.html')
+    return render(request, 'segun_app/success.html', context)
+
 
 def check_verified(request):
     try:

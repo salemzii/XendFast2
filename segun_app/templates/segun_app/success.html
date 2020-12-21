@@ -2,5 +2,20 @@
 
 {% load static %}
 {% block content %}
-    <h3>Successfully Transferred ${{ amount }} to {{ r }}</h3>
+    <style>
+        .contain {
+                width: 40%;
+                align:center;
+                margin: 100 auto;
+                }
+    </style>
+
+    <div class="alert alert-info">
+        <div class="contain">
+            <h3> Dear {{ request.user }}, you have Successfully Transferred ${{ amount }}</h3>    
+        </div>
+    </div>
+
 {% endblock content %}
+
+
