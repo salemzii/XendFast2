@@ -6,13 +6,12 @@ from django.conf.urls.static import static
 
 urlpatterns = [
 
-    path('', views.check_user, name='check'),
+    path('', views.landing_page, name='home'),
     path('send_money/', views.transaction, name='send-money'),
     path('charge/', views.charge, name='charge'),
     path('k_check/', views.check_verified, name='check'),
     path('kyc_success/', views.kyc_succ, name='kyc-success'),
     path('success/<str:args>', views.successmsg, name='success'), #<str:args>
-    path('home/', views.landing_page, name='home'),
     path('register/', views.register, name='sign-up'),
     path('email_verify/', views.email_success, name='e-success'),
     path('verify_mail/', views.verify_mail, name='verify'),
