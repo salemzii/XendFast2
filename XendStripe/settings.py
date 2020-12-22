@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os, smtplib
 #import django_heroku
-
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'lrg$8%f_m$a0uoi!8(+11*@#5-_u)^ekn0n(f1em&kw7+#fee@'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -142,12 +142,12 @@ LOGIN_URL = 'login'
 #mailing
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = os.environ.get('mail_name')
+EMAIL_HOST_USER = config('EMAIL_NAME')
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = os.environ.get('mail_name')
+DEFAULT_FROM_EMAIL = config('EMAIL_NAME')
 EMAIL_PORT = 587
-EMAIL_HOST_PASSWORD = os.environ.get('mail_pswd')
+EMAIL_HOST_PASSWORD = config('EMAIL_PSWD')
 
 #django_heroku.settings(locals())
